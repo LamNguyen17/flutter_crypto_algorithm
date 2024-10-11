@@ -14,11 +14,8 @@ class MethodChannelFlutterCryptoAlgorithm
   Future<String?> encrypt(
       String value, String privateKey, String? ivKey) async {
     try {
-      return await methodChannel.invokeMethod('encrypt', {
-        'value': value,
-        'privateKey': privateKey,
-        if (ivKey != null) 'ivKey': ivKey
-      });
+      return await methodChannel.invokeMethod('encrypt',
+          {'value': value, 'privateKey': privateKey, 'ivKey': ivKey});
     } catch (e) {
       return null;
     }
@@ -28,11 +25,8 @@ class MethodChannelFlutterCryptoAlgorithm
   Future<String?> decrypt(
       String value, String privateKey, String? ivKey) async {
     try {
-      return await methodChannel.invokeMethod('decrypt', {
-        'value': value,
-        'privateKey': privateKey,
-        if (ivKey != null) 'ivKey': ivKey
-      });
+      return await methodChannel.invokeMethod('decrypt',
+          {'value': value, 'privateKey': privateKey, 'ivKey': ivKey});
     } catch (e) {
       return null;
     }
