@@ -1,8 +1,9 @@
 # flutter_crypto_algorithm
 
-[![](https://img.shields.io/badge/native_language-Kotlin_&_Swift-green)](https://pub.dev/packages/flutter_crypto_algorithm)
-[![](https://img.shields.io/badge/license-MIT-8A2BE2)](https://github.com/LamNguyen17/flutter_crypto_algorithm/blob/master/LICENSE)
-[![](https://img.shields.io/badge/author-Forest_Nguyen-f59642)](https://github.com/LamNguyen17)
+[![Native language](https://img.shields.io/badge/native_language-Kotlin_&_Swift-green)](https://pub.dev/packages/flutter_crypto_algorithm)
+[![Code cov](https://codecov.io/gh/LamNguyen17/flutter_crypto_algorithm/branch/master/graph/badge.svg)](https://app.codecov.io/github/LamNguyen17/flutter_crypto_algorithm/blob/master/lib)
+[![License](https://img.shields.io/badge/license-MIT-8A2BE2)](https://github.com/LamNguyen17/flutter_crypto_algorithm/blob/master/LICENSE)
+[![Author](https://img.shields.io/badge/author-Forest_Nguyen-f59642)](https://github.com/LamNguyen17)
 
 A Flutter package for secure encryption algorithms, providing efficient tools for data protection and encryption operations
 
