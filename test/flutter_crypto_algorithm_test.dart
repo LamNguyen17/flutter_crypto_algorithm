@@ -9,7 +9,10 @@ class MockFlutterCryptoAlgorithmPlatform
     implements FlutterCryptoAlgorithmPlatform {
 
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Future<String?> encrypt(String value, String privateKey, String? ivKey) => Future.value('IVVM1yR+Cn2Bbxo7RnkAQw==');
+
+  @override
+  Future<String?> decrypt(String value, String privateKey, String? ivKey) => Future.value('Hello123');
 }
 
 void main() {
@@ -19,11 +22,17 @@ void main() {
     expect(initialPlatform, isInstanceOf<MethodChannelFlutterCryptoAlgorithm>());
   });
 
-  test('getPlatformVersion', () async {
-    FlutterCryptoAlgorithm flutterCryptoAlgorithmPlugin = FlutterCryptoAlgorithm();
+  test('encrypt', () async {
+    Crypto crypto = Crypto();
     MockFlutterCryptoAlgorithmPlatform fakePlatform = MockFlutterCryptoAlgorithmPlatform();
     FlutterCryptoAlgorithmPlatform.instance = fakePlatform;
+    expect(await crypto.encrypt('Hello123', 'Hello'), 'IVVM1yR+Cn2Bbxo7RnkAQw==');
+  });
 
-    expect(await flutterCryptoAlgorithmPlugin.getPlatformVersion(), '42');
+  test('decrypt', () async {
+    Crypto crypto = Crypto();
+    MockFlutterCryptoAlgorithmPlatform fakePlatform = MockFlutterCryptoAlgorithmPlatform();
+    FlutterCryptoAlgorithmPlatform.instance = fakePlatform;
+    expect(await crypto.decrypt('IVVM1yR+Cn2Bbxo7RnkAQw==', 'Hello'), 'Hello123');
   });
 }

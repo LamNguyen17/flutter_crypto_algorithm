@@ -1,0 +1,39 @@
+PODS:
+  - CryptoSwift (1.8.3)
+  - Flutter (1.0.0)
+  - flutter_crypto_algorithm (0.0.1):
+    - CryptoSwift (= 1.8.3)
+    - Flutter
+    - RxSwift (= 6.7.1)
+  - integration_test (0.0.1):
+    - Flutter
+  - RxSwift (6.7.1)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_crypto_algorithm (from `.symlinks/plugins/flutter_crypto_algorithm/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+
+SPEC REPOS:
+  trunk:
+    - CryptoSwift
+    - RxSwift
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_crypto_algorithm:
+    :path: ".symlinks/plugins/flutter_crypto_algorithm/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+
+SPEC CHECKSUMS:
+  CryptoSwift: 967f37cea5a3294d9cce358f78861652155be483
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_crypto_algorithm: e0b5068b94eb0b67f3e86413a9a4bcc166650d5b
+  integration_test: 13825b8a9334a850581300559b8839134b124670
+  RxSwift: b9a93a26031785159e11abd40d1a55bcb8057e52
+
+PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+
+COCOAPODS: 1.15.2

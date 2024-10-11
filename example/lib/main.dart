@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_crypto_algorithm/flutter_crypto_algorithm.dart';
 
 void main() {
@@ -16,34 +16,38 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _flutterCryptoAlgorithmPlugin = FlutterCryptoAlgorithm();
+  String _encrypt = '';
+  String _decrypt = '';
+  final _crypto = Crypto();
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    crypto();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
+  Future<void> crypto() async {
+    String encrypt;
+    String decrypt;
     try {
-      platformVersion =
-          await _flutterCryptoAlgorithmPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      encrypt =
+          await _crypto.encrypt('Hello123', 'Hello') ??
+              'Unknown encrypt';
+      decrypt = await _crypto.decrypt(encrypt, 'Hello') ??
+          'Unknown decrypt';
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      encrypt = 'Failed encrypt.';
+      decrypt = 'Failed decrypt.';
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
+    print('encrypt: $encrypt');
+
     setState(() {
-      _platformVersion = platformVersion;
+      _encrypt = encrypt;
+      _decrypt = decrypt;
     });
   }
 
@@ -52,11 +56,63 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Flutter Crypto Algorithm'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Section(title: 'AES', children: [
+                _buildText('Encrypt: ', _encrypt),
+                _buildText('Decrypt: ', _decrypt),
+              ]),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildText(String label, String value) {
+    return Text.rich(
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
+      TextSpan(
+        text: label,
+        style: const TextStyle(
+            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
+        children: [
+          TextSpan(
+            text: value,
+            style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                color: Colors.black),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Section extends StatelessWidget {
+  final String title;
+  final List<Widget> children;
+
+  const Section({super.key, required this.title, required this.children});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          ...children,
+        ],
       ),
     );
   }

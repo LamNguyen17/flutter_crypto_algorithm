@@ -12,7 +12,12 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
       channel,
       (MethodCall methodCall) async {
-        return '42';
+        switch (methodCall.method) {
+          case 'encrypt':
+            return 'IVVM1yR+Cn2Bbxo7RnkAQw==';
+          case 'decrypt':
+            return 'Hello123';
+        }
       },
     );
   });
@@ -21,7 +26,11 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await platform.getPlatformVersion(), '42');
+  test('encrypt', () async {
+    expect(await platform.encrypt('Hello123', 'Hello', null), 'IVVM1yR+Cn2Bbxo7RnkAQw==');
+  });
+
+  test('decrypt', () async {
+    expect(await platform.decrypt('IVVM1yR+Cn2Bbxo7RnkAQw==', 'Hello', null), 'Hello123');
   });
 }

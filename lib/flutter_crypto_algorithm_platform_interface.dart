@@ -23,7 +23,7 @@ abstract class FlutterCryptoAlgorithmPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
+  Future<String?> encrypt(String value, String privateKey, String? ivKey);
+
+  Future<String?> decrypt(String value, String privateKey, String? ivKey);
 }
