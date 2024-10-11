@@ -11,26 +11,27 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-  steps:
-    - name: Check out the repository
-      uses: actions/checkout@v2
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.19.6'  # Specify the Flutter version, e.g., 'stable'
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: flutter pub get
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.6'  # Specify the Flutter version, e.g., '2.10.0'
 
-    - name: Run tests
-      run: flutter test
+      - name: Install dependencies
+        run: flutter pub get
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2
-      with:
-        files: ./coverage/lcov.info
-        flags: flutter
-        name: code-coverage-report
-        token: 2f59bcbb-7263-4e0c-9a37-e710e39705bb  # Add this to your GitHub secrets
-        fail_ci_if_error: true
+      - name: Run tests
+        run: flutter test
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage/lcov.info
+          flags: flutter
+          name: code-coverage-report
+          token: 2f59bcbb-7263-4e0c-9a37-e710e39705bb  # Add this to your GitHub secrets
+          fail_ci_if_error: true
