@@ -1,6 +1,9 @@
 name: Flutter CI
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
@@ -18,16 +21,16 @@ jobs:
         with:
           flutter-version: '3.19.6'
 
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pub-cache
-            flutter/bin/cache
-          # key: ${{ runner.os }}-pub-cache-${{ hashFiles('pubspec.yaml') }}
-          key: ${{ runner.os }}-flutter-${{ hashFiles('pubspec.yaml', 'pubspec.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-
+#      - name: Cache Flutter dependencies
+#        uses: actions/cache@v3
+#        with:
+#          path: |
+#            ~/.pub-cache
+#            flutter/bin/cache
+#          # key: ${{ runner.os }}-pub-cache-${{ hashFiles('pubspec.yaml') }}
+#          key: ${{ runner.os }}-flutter-${{ hashFiles('pubspec.yaml', 'pubspec.lock') }}
+#          restore-keys: |
+#            ${{ runner.os }}-flutter-
 
       - name: Install dependencies
         run: flutter pub get
