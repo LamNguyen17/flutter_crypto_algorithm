@@ -1,6 +1,6 @@
 name: flutter_crypto_algorithm
 description: "A Flutter package for secure encryption algorithms, providing efficient tools for data protection and encryption operations"
-version: 0.0.1
+version: 0.1.0
 repository: https://github.com/LamNguyen17/flutter_crypto_algorithm
 issue_tracker: https://github.com/LamNguyen17/flutter_crypto_algorithm/issues
 homepage: https://github.com/LamNguyen17/flutter_crypto_algorithm
