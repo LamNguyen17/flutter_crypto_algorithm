@@ -5,6 +5,15 @@
 [![](https://img.shields.io/badge/author-Forest_Nguyen-f59642)](https://github.com/LamNguyen17)
 
 A Flutter package for secure encryption algorithms, providing efficient tools for data protection and encryption operations
+
+## Installation
+Run this command:
+With Flutter:
+```sh
+flutter pub add encryption_algorithm
+```
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter

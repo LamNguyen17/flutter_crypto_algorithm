@@ -6,11 +6,6 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.*
 
 class CryptoHelper {
-    enum class CryptoType {
-        ENCRYPT,
-        DECRYPT,
-    }
-
     object CONSTANTS {
         const val ERR_VALID_KEY = "Invalid key or corrupted data"
         const val ERR_INCORRECT_BLOCK_SIZE = "Incorrect block size"
@@ -32,7 +27,7 @@ class CryptoHelper {
         return hexLength;
     }
 
-    fun genSecretKey(algorithmType: String, secretKey: String?): SecretKey? {
+    fun genSecretKey(algorithmType: String, secretKey: String?): SecretKey {
         return when (algorithmType) {
             AES.ALGORITHM -> {
                 if (secretKey != null) {

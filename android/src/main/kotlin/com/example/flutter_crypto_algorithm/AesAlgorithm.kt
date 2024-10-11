@@ -25,11 +25,11 @@ class AesAlgorithm {
             val decryptedBytes = cipher.doFinal(decodedBytes)
             String(decryptedBytes, Charsets.UTF_8)
         } catch (e: BadPaddingException) {
-            CryptoHelper.CONSTANTS.DECRYPTION_ERR_VALID_KEY
+            CryptoHelper.CONSTANTS.ERR_VALID_KEY
         } catch (e: IllegalBlockSizeException) {
-            CryptoHelper.CONSTANTS.DECRYPTION_ERR_INCORRECT_BLOCK_SIZE
+            CryptoHelper.CONSTANTS.ERR_INCORRECT_BLOCK_SIZE
         } catch (e: Exception) {
-            CryptoHelper.CONSTANTS.DECRYPTION_ERR_UNEXPECTED_ERROR
+            CryptoHelper.CONSTANTS.ERR_UNEXPECTED_ERROR
         }
     }
 }

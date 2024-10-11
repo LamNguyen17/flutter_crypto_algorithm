@@ -10,8 +10,28 @@ class MethodChannelFlutterCryptoAlgorithm extends FlutterCryptoAlgorithmPlatform
   final methodChannel = const MethodChannel('flutter_crypto_algorithm');
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
+  Future<String?> encrypt(String value, String privateKey, String? ivKey) async {
+    try {
+      return await methodChannel.invokeMethod('encrypt', {
+        'value': value,
+        'privateKey': privateKey,
+        'ivKey': ivKey,
+      });
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<String?> decrypt(String value, String privateKey, String? ivKey) async {
+    try {
+      return await methodChannel.invokeMethod('decrypt', {
+        'value': value,
+        'privateKey': privateKey,
+        'ivKey': ivKey,
+      });
+    } catch (e) {
+      return null;
+    }
   }
 }

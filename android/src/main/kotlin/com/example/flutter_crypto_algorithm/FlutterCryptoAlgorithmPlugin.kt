@@ -8,6 +8,8 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class FlutterCryptoAlgorithmPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
@@ -34,14 +36,15 @@ class FlutterCryptoAlgorithmPlugin : FlutterPlugin, MethodCallHandler {
             ENCRYPT_METHOD -> {
                 val value = call.argument<String>("value")
                 val privateKey = call.argument<String>("privateKey")
-                val ivKey = call.argument<String>("ivKey")
-                if (value != null && privateKey != null && ivKey != null) {
+                val ivKey = call.argument<String>("ivKey") ?: ""
+                if (value != null && privateKey != null) {
                     activityScope.launch {
                         flow {
-                            cryptoHelper.encrypt(value, privateKey, ivKey)
+                            val encryptedData = aesAlgorithm.encrypt(value, privateKey, ivKey)
+                            emit(encryptedData)
                         }.flowOn(Dispatchers.IO).catch {
                             result.error(
-                                CryptoHelper.Constants.ERR_VALID_KEY,
+                                CryptoHelper.CONSTANTS.ERR_VALID_KEY,
                                 "Data to encrypt is null",
                                 null
                             )
@@ -51,7 +54,7 @@ class FlutterCryptoAlgorithmPlugin : FlutterPlugin, MethodCallHandler {
                     }
                 } else {
                     result.error(
-                        CryptoHelper.Constants.ERR_VALID_KEY,
+                        CryptoHelper.CONSTANTS.ERR_VALID_KEY,
                         "Data to encrypt is null",
                         null
                     )
@@ -61,14 +64,15 @@ class FlutterCryptoAlgorithmPlugin : FlutterPlugin, MethodCallHandler {
             DECRYPT_METHOD -> {
                 val value = call.argument<String>("value")
                 val privateKey = call.argument<String>("privateKey")
-                val ivKey = call.argument<String>("ivKey")
-                if (value != null && privateKey != null && ivKey != null) {
+                val ivKey = call.argument<String>("ivKey") ?: ""
+                if (value != null && privateKey != null) {
                     activityScope.launch {
                         flow {
-                            cryptoHelper.decrypt(value, privateKey, ivKey)
+                            val decryptData = aesAlgorithm.decrypt(value, privateKey, ivKey)
+                            emit(decryptData)
                         }.flowOn(Dispatchers.IO).catch {
                             result.error(
-                                CryptoHelper.Constants.ERR_VALID_KEY,
+                                CryptoHelper.CONSTANTS.ERR_VALID_KEY,
                                 "Data to decrypt is null",
                                 null
                             )
@@ -78,14 +82,12 @@ class FlutterCryptoAlgorithmPlugin : FlutterPlugin, MethodCallHandler {
                     }
                 } else {
                     result.error(
-                        CryptoHelper.Constants.ERR_VALID_KEY,
+                        CryptoHelper.CONSTANTS.ERR_VALID_KEY,
                         "Data to decrypt is null",
                         null
                     )
                 }
             }
-
-            "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
             else -> result.notImplemented()
         }
     }
