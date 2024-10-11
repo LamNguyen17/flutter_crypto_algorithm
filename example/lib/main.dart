@@ -16,9 +16,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _encrypt = 'Unknown';
-  String _decrypt = 'Unknown';
-  final _flutterCryptoAlgorithmPlugin = FlutterCryptoAlgorithm();
+  String _encrypt = '';
+  String _decrypt = '';
+  final _crypto = Crypto();
 
   @override
   void initState() {
@@ -32,9 +32,9 @@ class _MyAppState extends State<MyApp> {
     String decrypt;
     try {
       encrypt =
-          await _flutterCryptoAlgorithmPlugin.encrypt('Hello123', 'Hello') ??
+          await _crypto.encrypt('Hello123', 'Hello') ??
               'Unknown encrypt';
-      decrypt = await _flutterCryptoAlgorithmPlugin.decrypt(encrypt, 'Hello') ??
+      decrypt = await _crypto.decrypt(encrypt, 'Hello') ??
           'Unknown decrypt';
     } on PlatformException {
       encrypt = 'Failed encrypt.';

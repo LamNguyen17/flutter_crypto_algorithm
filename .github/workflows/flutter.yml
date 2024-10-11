@@ -1,12 +1,12 @@
 name: Flutter CI
 
 on:
-  push:
-    branches:
-      - aes-algorithm  # Adjust this to your default branch if necessary
+#  push:
+#    branches:
+#      - master
   pull_request:
     branches:
-      - aes-algorithm
+      - master
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.6'  # Specify the Flutter version, e.g., '2.10.0'
+          flutter-version: '3.19.6'
 
       - name: Cache Flutter dependencies
         uses: actions/cache@v3
@@ -42,5 +42,5 @@ jobs:
           files: ./coverage/lcov.info
           flags: flutter
           name: code-coverage-report
-          token: 2f59bcbb-7263-4e0c-9a37-e710e39705bb  # Add this to your GitHub secrets
+          token: 2f59bcbb-7263-4e0c-9a37-e710e39705bb
           fail_ci_if_error: true

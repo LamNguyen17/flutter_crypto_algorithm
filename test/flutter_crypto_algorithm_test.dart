@@ -23,18 +23,16 @@ void main() {
   });
 
   test('encrypt', () async {
-    FlutterCryptoAlgorithm flutterCryptoAlgorithmPlugin = FlutterCryptoAlgorithm();
+    Crypto crypto = Crypto();
     MockFlutterCryptoAlgorithmPlatform fakePlatform = MockFlutterCryptoAlgorithmPlatform();
     FlutterCryptoAlgorithmPlatform.instance = fakePlatform;
-
-    expect(await flutterCryptoAlgorithmPlugin.encrypt('Hello123', 'Hello'), 'IVVM1yR+Cn2Bbxo7RnkAQw==');
+    expect(await crypto.encrypt('Hello123', 'Hello'), 'IVVM1yR+Cn2Bbxo7RnkAQw==');
   });
 
   test('decrypt', () async {
-    FlutterCryptoAlgorithm flutterCryptoAlgorithmPlugin = FlutterCryptoAlgorithm();
+    Crypto crypto = Crypto();
     MockFlutterCryptoAlgorithmPlatform fakePlatform = MockFlutterCryptoAlgorithmPlatform();
     FlutterCryptoAlgorithmPlatform.instance = fakePlatform;
-
-    expect(await flutterCryptoAlgorithmPlugin.decrypt('IVVM1yR+Cn2Bbxo7RnkAQw==', 'Hello'), 'Hello123');
+    expect(await crypto.decrypt('IVVM1yR+Cn2Bbxo7RnkAQw==', 'Hello'), 'Hello123');
   });
 }

@@ -1,6 +1,6 @@
 import 'flutter_crypto_algorithm_platform_interface.dart';
 
-class FlutterCryptoAlgorithm {
+class Crypto {
   Future<String?> encrypt(String value, String privateKey, {String? ivKey}) {
     return FlutterCryptoAlgorithmPlatform.instance
         .encrypt(value, privateKey, ivKey);
