@@ -43,6 +43,8 @@ class _MyAppState extends State<MyApp> {
 
     if (!mounted) return;
 
+    print('encrypt: $encrypt');
+
     setState(() {
       _encrypt = encrypt;
       _decrypt = decrypt;
@@ -72,20 +74,23 @@ class _MyAppState extends State<MyApp> {
 
   Widget _buildText(String label, String value) {
     return Text.rich(
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
+      TextSpan(
+        text: label,
+        style: const TextStyle(
+            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
+        children: [
           TextSpan(
-            text: label,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
-            children: [
-              TextSpan(
-                text: value,
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.normal, color: Colors.black),
-              ),
-            ],
+            text: value,
+            style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                color: Colors.black),
           ),
-        );
+        ],
+      ),
+    );
   }
 }
 
