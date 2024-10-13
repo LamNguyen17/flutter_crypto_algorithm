@@ -46,5 +46,5 @@ jobs:
           files: ./coverage/lcov.info
           flags: flutter
           name: code-coverage-report
-          token: COVERAGE_KEY
+          token: ${{ secrets.COVERAGE_KEY }}
           fail_ci_if_error: true
