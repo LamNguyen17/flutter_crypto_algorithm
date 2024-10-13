@@ -39,12 +39,13 @@ jobs:
         run: flutter test --coverage
 
       - name: Upload coverage to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
         env:
-          API_KEY: ${{ secrets.COVERAGE_KEY }}
+          COVERAGE_KEY: ${{ secrets.COVERAGE_KEY }}
         uses: codecov/codecov-action@v2
         with:
           files: ./coverage/lcov.info
           flags: flutter
           name: code-coverage-report
-          token: $API_KEY
+          token: COVERAGE_KEY
           fail_ci_if_error: true
